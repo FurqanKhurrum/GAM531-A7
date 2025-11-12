@@ -38,12 +38,19 @@ Priority order ensures proper handling of overlapping actions:
 - **Orthographic projection** updates dynamically based on camera position.  
 - **Background system**: loads a high-resolution image, preserving its aspect ratio and tiling it seamlessly across the scene width (no stretching or zoom distortion).
 
+### 🔊 Audio System
+- **NAudio integration** for sound effects and background music
+- Unique sounds for punches, kicks, jumps, and landing
+- Audio plays on every input for instant feedback
+- Separate volume controls for music and sound effects
 ---
 
 ## 🧩 Technical Highlights
 - Built with **OpenGL 3.3 Core Profile** via OpenTK.  
 - Custom GLSL shader pipeline for sprite rendering.  
+- **NAudio** for cross-platform audio playback  
 - Modular helper classes:
+  - `AudioManager.cs` — Sound effect and music management  
   - `ShaderHelper.cs` — shader compilation/linking  
   - `SpriteSheetHelper.cs` — UV frame calculations  
   - `TextureLoader.cs` — image loading via ImageSharp  
@@ -59,6 +66,7 @@ Priority order ensures proper handling of overlapping actions:
 | Preventing animation state conflicts (e.g., attack interrupting jump) | Added strict priority-based state transition logic. |
 | Character clipping beyond scene edges | Implemented position clamping and adjustable scene width. |
 | Background stretching issues | Reworked scaling to preserve original image proportions during rendering. |
+| Audio not playing on every button press | Decoupled audio playback from animation cooldown timers |
 
 ---
 
@@ -79,7 +87,8 @@ Priority order ensures proper handling of overlapping actions:
 ### Prerequisites
 - **.NET 8 SDK** or later installed  
 - **OpenTK 4.x** (automatically restored via NuGet)  
-- **SixLabors.ImageSharp** for texture loading  
+- **SixLabors.ImageSharp** for texture loading
+- **NAudio 2.2.1** for audio playback  
 
 ### Steps to Run
 1. Clone or extract the project folder.  
@@ -87,8 +96,10 @@ Priority order ensures proper handling of overlapping actions:
    ```bash
    dotnet run
    ```
-3. Ensure your `/Assets/Sprites/` folder contains all animation textures and `Background.png`.  
-4. Use the controls above to interact with the scene.  
+3. Ensure your `/Assets/Sprites/` folder contains all animation textures and `Background.png`.
+4. Add audio files to `/Assets/Audio/`:
+   - punch.wav, jump.wav
+5. Use the controls above to interact with the scene.  
 
 ### Notes
 - The game uses an **orthographic projection** of 800×600.  
@@ -102,6 +113,9 @@ Priority order ensures proper handling of overlapping actions:
 - https://craftpix.net/freebies/free-knight-character-sprites-pixel-art
 
 ## Background Image
-- https://craftpix.net/freebies/free-pixel-art-fantasy-2d-battlegrounds
+- https://craftpix.net/freebies/free-pixel-art-fantasy-2d-battlegrounds  
+
+### Audio Resources
+- [Freesound.org](https://freesound.org/) - Free sound effects library
 
 ---
